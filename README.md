@@ -2,7 +2,7 @@
 
 This is a Telegram Bot to monitor events of [JOBO](https://www.madridcultura.es/jobo)
 
-[![Watch the demo](images/telegram.png)](https://telegram.me/avisojobot)
+[![Watch the demo](https://raw.githubusercontent.com/Luis-GA/Jobo-Telegram-Bot/master/images/telegram.png)](https://telegram.me/avisojobot)
 
 ## Features
     - Subscribe to the monitoring stream to be alerted of new events
@@ -16,7 +16,7 @@ The architecture is based in three components:
 - Docker container as the Telegram Bot
 - JOBO as the Online Ticket sales
 
-![Watch the demo](images/diagram.png)
+![Watch the demo](https://raw.githubusercontent.com/Luis-GA/Jobo-Telegram-Bot/master/images/diagram.png)
 
 The Docker container is a Python-slim image called [luisupm/jobo](https://hub.docker.com/repository/docker/luisupm/jobo).
 It is divided in three modules:
@@ -26,7 +26,7 @@ It is divided in three modules:
 
 
 ## Demo
-[![Watch the demo](images/demo.gif)](https://www.youtube.com/watch?v=sFIftHo5CL8)
+[![Watch the demo](https://raw.githubusercontent.com/Luis-GA/Jobo-Telegram-Bot/master/images/demo.gif)](https://www.youtube.com/watch?v=sFIftHo5CL8)
 
 ## How to run
 
