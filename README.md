@@ -38,12 +38,16 @@ It is divided in three modules:
 - [Atlas MongoDB account](https://www.mongodb.com/cloud/atlas)
 
 ### Run 
-
+#### x86
 Write in the console:
 ```console
 foo@bar:~$ docker run --restart always -e MONGODB=<Altas Connection String> -e JOBO_USER=<Registered Email> -e JOBO_PASSWORD=<Registered Password> -e TOKEN=<Telegram Bot Token> luisupm/jobo
 ```
-
+#### ARM
+Write in the console:
+```console
+foo@bar:~$ docker run --restart always -e MONGODB=<Altas Connection String> -e JOBO_USER=<Registered Email> -e JOBO_PASSWORD=<Registered Password> -e TOKEN=<Telegram Bot Token> luisupm/jobo:arm
+```
 
 
 
