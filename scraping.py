@@ -22,7 +22,8 @@ class JoboScraping:
             self.password = password
 
     def __decode_strings__(self, string):
-        return string.encode('ascii').decode('unicode-escape').encode('iso-8859-1').decode('utf-8')
+        string = string.encode('ascii').decode('unicode-escape').encode('iso-8859-1').decode('utf-8')
+        return string.replace('\r\n', '').replace('  ', '')
 
     def __clean_date__(self, string):
         string = string.replace('\\r', '').replace('range', '').replace('from', '').replace('to', '').replace('\\t', '')
@@ -49,7 +50,7 @@ class JoboScraping:
     def __event_data_downloader__(self):
         events_home_page = bs(str(self.session.get(self.events_url).content), 'html.parser')
 
-        event_name = events_home_page.find_all(attrs={'class': 'title'})[3:-8]
+        event_name = events_home_page.find_all(attrs={'class': 'title'})[4:-8]
         event_image = events_home_page.find_all(attrs={'class': 'product_image_container product-image-scale-1'})
         days = events_home_page.find_all('span', class_='date')
         sites = events_home_page.find_all('span', class_='location')
@@ -70,7 +71,7 @@ class JoboScraping:
                 image = event_image[counter].contents[1][list(event_image[1].contents[1].attrs.keys())[10]]
                 days = self.__clean_date__(str(days[counter]))
                 place = self.__decode_strings__(sites[(counter * 2)].find('span', class_='site').get_text())
-                link = self.base_url + links[counter_link].get('href')
+                link = self.base_url + links.get(counter_link, {}).get('href', ' ')
             except Exception:
                 events['scraping_error'] = True
             counter = counter + 1
