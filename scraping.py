@@ -71,7 +71,9 @@ class JoboScraping:
                 image = event_image[counter].contents[1][list(event_image[1].contents[1].attrs.keys())[10]]
                 days = self.__clean_date__(str(days[counter]))
                 place = self.__decode_strings__(sites[(counter * 2)].find('span', class_='site').get_text())
-                link = self.base_url + links.get(counter_link, {}).get('href', ' ')
+                # TODO: Find elegant way. Link is currently broken
+                link = 'https://madridcultura-jobo.shop.secutix.com/secured/list/events'
+                # link = self.base_url + links.get(counter_link, {}).get('href', ' ')
             except Exception:
                 events['scraping_error'] = True
             counter = counter + 1
@@ -80,8 +82,6 @@ class JoboScraping:
                 try:
                     events[title] = {'title': title, 'image': image, 'place': place, 'link': link, 'days': days}
                 except Exception:
-                    # TODO: Find elegant way. Link is currently broken
-                    link = 'https://madridcultura-jobo.shop.secutix.com/secured/list/events'
                     events[title] = {'title': title, 'image': image, 'place': place, 'link': link, 'days': days}
             else:
                 events['scraping_error'] = True
