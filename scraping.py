@@ -77,7 +77,12 @@ class JoboScraping:
             counter = counter + 1
             counter_link = counter_link + 1
             if str(place) not in ('none', 'None'):
-                events[title] = {'title': title, 'image': image, 'place': place, 'link': link, 'days': days}
+                try:
+                    events[title] = {'title': title, 'image': image, 'place': place, 'link': link, 'days': days}
+                except Exception:
+                    # TODO: Find elegant way. Link is currently broken
+                    link = 'https://madridcultura-jobo.shop.secutix.com/secured/list/events'
+                    events[title] = {'title': title, 'image': image, 'place': place, 'link': link, 'days': days}
             else:
                 events['scraping_error'] = True
 
