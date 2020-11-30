@@ -50,7 +50,7 @@ class JoboScraping:
     def __event_data_downloader__(self):
         events_home_page = bs(str(self.session.get(self.events_url).content), 'html.parser')
 
-        event_name = events_home_page.find_all(attrs={'class': 'title'})[4:-8]
+        event_name = events_home_page.find_all(attrs={'class': 'title'})[4:-10]
         event_image = events_home_page.find_all(attrs={'class': 'product_image_container product-image-scale-1'})
         days = events_home_page.find_all('span', class_='date')
         sites = events_home_page.find_all('span', class_='location')
@@ -71,9 +71,10 @@ class JoboScraping:
                 image = event_image[counter].contents[1][list(event_image[1].contents[1].attrs.keys())[10]]
                 days = self.__clean_date__(str(days[counter]))
                 place = self.__decode_strings__(sites[(counter * 2)].find('span', class_='site').get_text())
-                # TODO: Find elegant way. Link is currently broken
-                link = 'https://madridcultura-jobo.shop.secutix.com/secured/list/events'
-                # link = self.base_url + links.get(counter_link, {}).get('href', ' ')
+                try:
+                    link = self.base_url[:-1] + links[counter_link].get('href', ' ')
+                except:
+                    link = 'https://madridcultura-jobo.shop.secutix.com/secured/list/events'
             except Exception:
                 events['scraping_error'] = True
             counter = counter + 1
