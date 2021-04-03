@@ -69,21 +69,22 @@ class JoboScraping:
             try:
                 title = self.__decode_strings__(str(event.contents[0]))
                 image = event_image[counter].contents[1][list(event_image[1].contents[1].attrs.keys())[10]]
-                days = self.__clean_date__(str(days[counter]))
+                day = self.__clean_date__(str(days[counter_link]))
                 place = self.__decode_strings__(sites[(counter * 2)].find('span', class_='site').get_text())
                 try:
                     link = self.base_url[:-1] + links[counter_link].get('href', ' ')
                 except:
                     link = 'https://madridcultura-jobo.shop.secutix.com/secured/list/events'
-            except Exception:
+            except Exception as e:
                 events['scraping_error'] = True
             counter = counter + 1
             counter_link = counter_link + 1
             if str(place) not in ('none', 'None'):
                 try:
-                    events[title] = {'title': title, 'image': image, 'place': place, 'link': link, 'days': days}
+                    if not events.get(title):
+                        events[title] = {'title': title, 'image': image, 'place': place, 'link': link, 'days': day}
                 except Exception:
-                    events[title] = {'title': title, 'image': image, 'place': place, 'link': link, 'days': days}
+                    events[title] = {'title': title, 'image': image, 'place': place, 'link': link, 'days': day}
             else:
                 events['scraping_error'] = True
 
