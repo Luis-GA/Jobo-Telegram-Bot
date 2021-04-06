@@ -99,3 +99,4 @@ class JoboScraping:
 
         # Scrap events
         return self.__scrap_available_events__(event_name, event_image, days, sites, links)
+
