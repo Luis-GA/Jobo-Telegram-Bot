@@ -28,10 +28,11 @@ class NEAS:
 
     def __print_events__(self, user_id, events):
         for event in events:
-            string = "🎭Titulo: " + str(event['title']) + \
-                     "\n🗺Lugar: " + str(event['place']) + \
-                     "\n📆Dias: " + str(event['days']) + \
-                     "\n🔗Link: " + str(event['link'])
+            string = "🎭Titulo: " + event['title'] + \
+                     "🧾Descripcion: " + event['description'] + \
+                     "\n🗺Lugar: " + event['place'] + \
+                     "\n📆Dias: " + event['days'] + \
+                     "\n🔗Link: " + event['link']
             if event['image'] != 'none':
                 self.bot.send_photo(chat_id=user_id, photo=event['image'], caption=string)
             else:
