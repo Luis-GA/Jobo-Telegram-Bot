@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import requests
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from pymongo import MongoClient
 from NEAS import NEAS
@@ -52,6 +53,13 @@ class JoboBot:
 
             elif update.message.text == 'UNSUB':
                 self.__unsuscribe_user__(update)
+
+            elif update.message.text == 'IP?':
+                self.__ip__(update)
+
+    def __ip__(self, update):
+        response = requests.get("http://icanhazip.com/").text
+        update.message.reply_text(str('{}'.format(response)))
 
     def __subscribe_user__(self, update):
         user_id = update.message.chat_id
