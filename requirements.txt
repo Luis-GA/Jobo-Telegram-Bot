@@ -5,5 +5,6 @@ tornado>=5.1
 cryptography
 pymongo
 requests
-beautifulsoup4
 dnspython
+jobo-scraper==1.0.0
+

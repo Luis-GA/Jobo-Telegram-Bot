@@ -1,7 +1,7 @@
 import sched
 import time
 from threading import Thread
-from scraping import JoboScraping
+from jobo_scraper import JoboScraping
 
 
 class NEAS:
@@ -17,7 +17,7 @@ class NEAS:
     def __init__(self, bot, db, jobo_auth):
         self.bot = bot
         self.db_client = db
-        self.scrap = JoboScraping(jobo_auth=jobo_auth)
+        self.scrap = JoboScraping(user=jobo_auth[0], password=jobo_auth[1])
         past_events = list(self.db_client.events.find())
         self.current_events = []
         if len(past_events) != 0:
@@ -54,7 +54,7 @@ class NEAS:
             self.db_client.events.insert_one(self.new_events[key])
 
     def search_new_events(self):
-        self.new_events = self.scrap.get_list_of_events()
+        self.new_events = self.scrap.available_events()
         if self.new_events.get('scraping_error'):
             events_difference = []
         else:
