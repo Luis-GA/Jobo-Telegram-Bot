@@ -2,7 +2,7 @@ FROM python:3.9
 RUN apt-get update
 #RUN apt-get install gcc -y
 WORKDIR /jobo
-COPY jobo_bot.py NEAS.py scraping.py requirements.txt ./
+COPY jobo_bot.py NEAS.py requirements.txt ./
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
